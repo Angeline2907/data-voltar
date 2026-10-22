@@ -1,0 +1,87 @@
+/* Configuração e reset básico da página */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Caixa onde o jogo acontece */
+.container {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Esconde todas as telas por padrão */
+.passo {
+    display: none;
+}
+
+/* Mostra apenas a tela que tiver a classe ativo */
+.passo.ativo {
+    display: block;
+}
+
+h2 {
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #666666;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Estilo geral dos botões */
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Botões de Avanço (Estilo Azul) */
+.btn-proximo {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.btn-proximo:hover {
+    background-color: #0056b3;
+}
+
+/* NOVA CLASSE: Botões de Voltar (Estilo Cinza Escuro) */
+.btn-voltar {
+    background-color: #4a5568;
+    color: #ffffff;
+    margin-top: 20px; /* Dá um espaço extra do botão de avançar */
+}
+
+.btn-voltar:hover {
+    background-color: #2d3748;
+}
