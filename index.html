@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventura de Texto</title>
+    <style>
+        /* Estilização básica do jogo */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .passo {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            display: none; /* Esconde todos os passos por padrão */
+        }
+
+        /* Classe especial que mostra apenas o passo atual ativo */
+        .passo.ativo {
+            display: block;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-proximo {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Nova classe de estilização solicitada no desafio para o botão de voltar */
+        .btn-voltar {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PASSO 1 (Início da Aventura) -->
+    <div class="passo ativo" id="passo-1">
+        <h2>Hora do Desafio!</h2>
+        <p>Você está na entrada de uma caverna misteriosa. O que deseja fazer?</p>
+        <button class="btn-proximo" data-proximo="2">Entrar na caverna</button>
+    </div>
+
+    <!-- PASSO 2 (Bifurcação) -->
+    <div class="passo" id="passo-2">
+        <h2>Dentro da Caverna</h2>
+        <p>O caminho se divide em dois. Você ouve um barulho estranho à direita.</p>
+        <button class="btn-proximo" data-proximo="3">Ir pela esquerda</button>
+        <!-- Novo botão de voltar com classe e atributo personalizado -->
+        <button class="btn-voltar" data-voltar="1">⬅ Voltar ao início</button>
+    </div>
+
+    <!-- PASSO 3 (Fim do Caminho) -->
+    <div class="passo" id="passo-3">
+        <h2>O Fim?</h2>
+        <p>Você encontrou um baú trancado, mas não tem a chave.</p>
+        <!-- Novo botão de voltar para retornar ao passo 2 -->
+        <button class="btn-voltar" data-voltar="2">⬅ Voltar para a bifurcação</button>
+    </div>
+
+    <script>
+        // Seleciona todos os passos do jogo
+        const passos = document.querySelectorAll('.passo');
+
+        // Função genérica para alternar as telas/passos
+        function alternarPasso(idDoProximoPasso) {
+            // Remove a classe 'ativo' de todas as divs para escondê-las
+            passos.forEach(passo => passo.classList.remove('ativo'));
+            
+            // Adiciona a classe 'ativo' apenas na div que queremos mostrar
+            const proximoPasso = document.getElementById(`passo-${idDoProximoPasso}`);
+            if (proximoPasso) {
+                proximoPasso.classList.add('ativo');
+            }
+        }
+
+        // --- LÓGICA DOS BOTÕES DE AVANÇAR ---
+        const botoesProximo = document.querySelectorAll('.btn-proximo');
+        botoesProximo.forEach(botao => {
+            botao.addEventListener('click', function() {
+                const destino = this.getAttribute('data-proximo');
+                alternarPasso(destino);
+            });
+        });
+
+        // --- NOVO: LÓGICA DOS BOTÕES DE VOLTAR (Exigido pelo Desafio) ---
+        const botoesVoltar = document.querySelectorAll('.btn-voltar');
+        botoesVoltar.forEach(botao => {
+            botao.addEventListener('click', function() {
+                // Lê o valor do novo atributo 'data-voltar'
+                const destinoVoltar = this.getAttribute('data-voltar');
+                // Executa a troca de tela para o passo anterior
+                alternarPasso(destinoVoltar);
+            });
+        });
+    </script>
+
+</body>
+</html>
